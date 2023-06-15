@@ -182,6 +182,8 @@ def login():
                     st.sidebar.success('Password modified successfully')
             except Exception as e:
                 st.sidebar.error(e)
+        else:
+            st.sidebar.warning("Please log in first!")
 
 
 def get_next_largest_number(n):
