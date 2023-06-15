@@ -308,7 +308,7 @@ def manager_dashboard(mgr_name):
         prev_nsr = get_num_shares()
         max_nsr = get_next_largest_number(total_nsr) + 2
         st.session_state.nsr = st.slider(f"Intended total shares (as of {date})", min_value=1, max_value=max_nsr, step=1,
-                                value=total_nsr)
+                                value=total_nsr, help="This is the total number of shares available in this company, which should be no less than the total number of shares distributed to employees.")
         st.write(f"Number of shares unallocated (or underflow): {format(st.session_state.nsr-prev_nsr,',')}")
         # if st.button(f"Save number of shares"):
         update_total_shares(st.session_state.nsr)
