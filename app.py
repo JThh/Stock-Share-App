@@ -199,14 +199,16 @@ def get_next_largest_number(n):
 # Plot stock share history
 def plot_stock_history(df):
     df = df.set_index("date")
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(4, 3))
     ax.plot(df.index, df["shares"], marker="o")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Shares")
-    plt.tight_layout()
+    # Customize the axis labels
+    ax.set_xlabel("Date", fontsize=6)
+    ax.set_ylabel("Shares", fontsize=6)
     plt.xticks(rotation=45)
-    plt.figure(figsize=(8, 6))
-    st.pyplot(fig)
+    ax.tick_params(axis='both', which='major', labelsize=6)
+    ax.tick_params(axis='both', which='minor', labelsize=4)
+    plt.figure()
+    st.pyplot(fig, use_container_width=False)
 
 # Employee dashboard
 def employee_dashboard(employee_name):
