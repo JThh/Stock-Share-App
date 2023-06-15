@@ -201,6 +201,7 @@ def get_next_largest_number(n):
 
 # Plot stock share history
 def plot_stock_history(df):
+    df = df.sort_values(["date"])
     df = df.set_index("date")
     fig, ax = plt.subplots(figsize=(4, 3))
     ax.plot(df.index, df["shares"], marker="o")
