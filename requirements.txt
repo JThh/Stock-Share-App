@@ -1,2 +1,2 @@
 pymongo
-seaborn
+streamlit-authenticator
