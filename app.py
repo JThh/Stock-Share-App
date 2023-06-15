@@ -57,12 +57,11 @@ def get_latest_share_value():
 
 def update_latest_share_value(value: int):
     db = client.stockdb
-    latest_date = list(db.value.find().sort("date", 1).limit(1))[0]['date']
-    if latest_date == date:
+    try:
         query = { "date":  date}
         values = { "$set": { "value": value } }
         db.value.update_one(query, values)
-    else:
+    except:
         db.value.insert_one({"value": value, "date": date,})
 
 # @st.cache_data(ttl=600)
