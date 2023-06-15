@@ -1,5 +1,6 @@
 import certifi
 from datetime import datetime
+import random
 
 import streamlit as st
 import streamlit_authenticator as stauth
@@ -362,7 +363,7 @@ def manager_dashboard(mgr_name):
         data = get_all_data()
         tdf = pd.DataFrame(data)
         tdf = tdf[['name', 'current_value', 'history']]
-        tdf['history'] = tdf['history'].apply(lambda x:[x[0]['shares'] for x_ in x][-3:])
+        tdf['history'] = tdf['history'].apply(lambda x:sorted([x[0]['shares'] for x_ in x][-3:], key=lambda _:random.random()))
         tdf['amount'] = tdf['current_value'] * get_latest_share_value()
         tdf['amount'] = tdf['amount'].apply(lambda x:'$'+format(x, ','))
         tdf = tdf[['name', 'amount', 'current_value', 'history']]
