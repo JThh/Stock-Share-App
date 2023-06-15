@@ -1,0 +1,30 @@
+cookie:
+  expiry_days: 0
+  key: example_key
+  name: rookie
+credentials:
+  usernames:
+    jdoe:
+      email: john.doe@u.nus.edu
+      name: John Doe
+      password: $2b$12$.SRiKtiWTmn/RZKZ7NnNGO51s.5aoi9ZYTwnDg1hzomWHK/ncyIo6
+    jjoe:
+      email: example@email.com
+      name: James Joe
+      password: $2b$12$C5oGtfvHgPveZ76C5cEouOIqhPROHZ7DOyWcJiX/v43FvbV5NH3.K
+    jsmith:
+      email: james.smith@gmail.com
+      name: James Smith
+      password: $2b$12$awycvHrltKEwrKISj.WKh.Mjb3ZZHKbzsObWAojzA55RE1GegdsMS
+    lee:
+      email: example@email.com
+      name: Lucas Lee
+      password: $2b$12$6NeZIo.VfdM1J26WLPWKf.NQJgpk.WLB2P9Eoa3FDLbkX.zKn3Y2C
+    lee1:
+      email: example@email.com
+      name: louis lee
+      password: $2b$12$PAyjbNchX1aDuXgGQk9CRudHd14Y5shHZjnyxfS.7NsHqgLZAFrNK
+preauthorized:
+  emails:
+  - julius.han@outlook.com
+  - youy@comp.nus.edu.sg
