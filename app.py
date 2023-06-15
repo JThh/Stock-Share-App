@@ -344,8 +344,10 @@ def manager_dashboard(mgr_name):
             def shr_on_change(share):
                 st.session_state.nsr -= (share - old_share)
         
-            share = col1.number_input("Enter new share", min_value=0, max_value=st.session_state.nsr - old_share,step=1,
-                                value=int(employee_share['current_value']), on_change=shr_on_change, args=(share,))
+            share = col1.number_input("Enter new share", min_value=0, 
+                                      max_value=max(int(employee_share['current_value']), st.session_state.nsr - old_share),
+                                      step=1,
+                                      value=int(employee_share['current_value']), on_change=shr_on_change, args=(share,))
             level = col2.number_input(f"Update employee level (Current: level {get_level(employee_name)})", 
                                     min_value=1, max_value=10, step=1, value=get_level(employee_name), 
                                     help="Maximum level is 10.")
