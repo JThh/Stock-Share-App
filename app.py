@@ -74,16 +74,21 @@ def update_multiple_share_values(value_edits):
     value_edits = value_edits.to_dict()
     db = client.stockdb
     length = len(value_edits['value'].keys())
-    print(value_edits, length)
+    dates = list(db.value2.distinct('date'))
+    saved_dates = []
     for i in range(length):
         value = value_edits['value'][i]
-        save_date = value_edits['date'][i]
+        save_date = value_edits['date'][i]        
         if not value or not save_date:
             continue
         query = {"date":  save_date}
         values = {"$set": {"value": value}}
         db.value2.update_one(query, values, upsert=True)
+        saved_dates.append(save_date)
 
+    for date_ in dates:
+        if date_ not in saved_dates:
+            db.value2.delete_one({'date': date_})
 
 def get_latest_share_value():
     db = client.stockdb
