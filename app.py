@@ -393,7 +393,7 @@ def manager_dashboard():
                                     hide_index=True,
                                     on_change=partial(update_multiple_share_values, shares_df)
                                     )
-        if st.button("Save Updates Permanently"):
+        if st.button("See Updates Immediately"):
             update_multiple_share_values(edited_shares)
         st.write(f"Current share value: $**{format(get_latest_share_value(), ',')}**")
         
