@@ -45,11 +45,6 @@ def init_connection():
 
 client = init_connection()
 
-# Add new share value at a specific date (can be at an older date). (data editor)
-# To control the growth of company's share value.
-
-# All employees will have the same share value.
-
 
 def create_new_user(name):
     db = client.stockdb
@@ -89,6 +84,7 @@ def update_multiple_share_values(value_edits):
     for date_ in dates:
         if date_ not in saved_dates:
             db.value2.delete_one({'date': date_})
+
 
 def get_latest_share_value():
     db = client.stockdb
@@ -263,6 +259,7 @@ def plot_stock_history(df):
     plt.figure()
     st.pyplot(fig, use_container_width=False)
     
+
 def plot_stock_history_flex(df):
     df = df.sort_values(["date"])
     df = df.set_index("date")
@@ -277,9 +274,8 @@ def plot_stock_history_flex(df):
     plt.figure()
     st.pyplot(fig, use_container_width=True)
 
+
 # Employee dashboard
-
-
 def employee_dashboard(employee_name):
     st.title("Employee Dashboard")
     employee_data = get_employee_data(employee_name)
@@ -316,7 +312,7 @@ def employee_dashboard(employee_name):
         st.write(f"Growth Percentage (per day): {growth:.2f}%")
 
     if "history" in employee_data:
-        st.subheader(f"Stock Share History for {employee_name}")
+        st.subheader(f"Personal Share History for {employee_name}")
         plot_stock_history(df)
 
     with st.expander("Request a Share Review"):
@@ -329,9 +325,8 @@ def employee_dashboard(employee_name):
         st.markdown(f"<a href='mailto:{manager_email}?cc={cc_email}&subject={subject}&body={contents}'>Send Email to {manager_email}</a>",
                     unsafe_allow_html=True)
 
+
 # Manager dashboard
-
-
 def manager_dashboard():
     # add user guide content to sidebar
     st.sidebar.title("Manager User Guide")
@@ -387,18 +382,12 @@ def manager_dashboard():
                                         ),
                                         "value": st.column_config.NumberColumn(
                                             "Value Per Share ($)",
-                                            help="The value per share in USD",
+                                            help="The value per share in USD (delete rows by ticking the rows on the left and delete)",
                                             min_value=0,
                                             max_value=1000000,
                                             step=1,
                                             format="$%d",
-                                        ),
-                                        "_index": st.column_config.Column(
-                                            "💡 Hint",
-                                            help="You may add new rows and the edits will be saved to database automatically.",
-                                            disabled=True,
-                                        ),
-
+                                        )
                                     },
                                     num_rows="dynamic",
                                     hide_index=True,
@@ -419,7 +408,7 @@ def manager_dashboard():
         st.session_state.nsr = st.slider(f"Intended total shares (as of {current_date})", min_value=1, max_value=max_nsr, step=1,
                                          value=total_nsr, help="This is the total number of shares available in this company, which should be no less than the total number of shares distributed to employees.")
         st.write(
-            f"Number of shares unallocated (or over-allocated): {format(st.session_state.nsr-prev_nsr,',')}")
+            f"Number of shares unallocated (or overallocated): {format(st.session_state.nsr-prev_nsr,',')}")
         # if st.button(f"Save number of shares"):
         update_total_shares(st.session_state.nsr)
         # st.success("New number of shares saved!")
@@ -449,7 +438,7 @@ def manager_dashboard():
             st.write(f"Growth Percentage (per day): {growth:.2f}%")
 
         if "history" in employee_share:
-            st.subheader(f"Stock Share Growth History for {employee_name}")
+            st.subheader(f"Personal Stock Share History for {employee_name}")
             plot_stock_history(df)
 
         with st.expander("Edit Employee Shares", expanded=True):
